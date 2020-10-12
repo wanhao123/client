@@ -31,9 +31,6 @@ cc.Class({
         onStartEventName : {
             default : eventComponent.startEventName,
         },
-        emitEndEventName : {
-            default : eventComponent.endEventName,
-        },
         trigger : {
             default : 0,
             type : cc.Float,
@@ -61,37 +58,12 @@ cc.Class({
 
     // 监听事件回调
     eventCallback (arg1, arg2, arg3, arg4, arg5) {
-        let state = undefined;
-        if(!arg1)
+        if(typeof(arg1) !== "number")
         {
-            if(this.onStartEventName.substr(0, 5) === "gData")
-            {
-                state = globalData.getData(this.onStartEventName.substr(6));
-            }
-            else
-            {
-                return;
-            }
-        }
-        else
-        {
-            if(typeof(arg1) !== "number")
-            {
-                return;
-            }
-            else
-            {
-                state = arg1
-            }
+            return;
         }
 
-        
-        let lastState = this.node.active;
-        this.node.active = state > this.trigger;
-        if(lastState !== this.node.active)
-        {
-            this.node.emit(this.emitEndEventName);
-        }
+        this.node.active = arg1 > this.trigger;
     },
 
     onDestroy () {

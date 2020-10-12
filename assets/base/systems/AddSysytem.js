@@ -39,7 +39,7 @@ cc.Class({
 
     editor : {
         // requireComponent : cc.Sprite,
-        menu: "动态添加脚本",
+        menu: "动态添加",
     },
 
     // LIFE-CYCLE CALLBACKS:
